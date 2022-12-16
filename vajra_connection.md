@@ -17,6 +17,19 @@ vajra wifi password: abhiyaan123
 vajra username: abhiyaan2
 vajra password: bolt2
 
+## Copying files
+
+the command scp lets you copy across devices.
+
+`scp filepath1 filepath2`
+
+for the filepaths on a different machine, username@ipaddress:filepath must be used. Else it's assumed to be a path on your machine. Do *not* forget the :  
+To find the ip address of your laptop, use
+`hostname -I`
+
+
+## Time issues
+
 Another important thing: when we unplug vajra's battery, its clock stops ticking. 
 So when we catkin_make it much later, the command says that the files it's trying to build are from the future and it refuses to build anything. 
 
