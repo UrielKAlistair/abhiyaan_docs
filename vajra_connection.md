@@ -21,9 +21,9 @@ vajra password: bolt2
 
 the command scp lets you copy across devices.
 
-`scp filepath1 filepath2`
+`scp filepath destinationfolderpath`
 
-for the filepaths on a different machine, username@ipaddress:filepath must be used. Else it's assumed to be a path on your machine. Do *not* forget the :  
+for the paths on a different machine, username@ipaddress:path must be used. Else it's assumed to be a path on your machine. Do *not* forget the :  
 To find the ip address of your laptop, use
 `hostname -I`
 
