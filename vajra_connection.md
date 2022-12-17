@@ -29,6 +29,8 @@ To find the ip address of your laptop, use
 
 ## Accessing Vajra's ROS Network from your laptop:
 
+This lets you access the rostopic published on the vehicle from your laptop. It allows you to run more complex processing from the topics on your machine, and then publish to those very topics without taxing the vehicle. This is especially great for visualisations.
+
 ### On Vajra
 
 `export ROS_HOSTAME=<Vajra_ip>;`
@@ -50,7 +52,7 @@ So when we catkin_make it much later, the command says that the files it's tryin
 
 We need to sync the time to the net by connecting LAN to vajra, approving netaccess and doing  
 
-`timedatectl set-ntp true  
-systemctl restart systemd-timesyncd`
+`timedatectl set-ntp true`  
+`systemctl restart systemd-timesyncd`
 
 This is kind of a pain, would be awesome if someone can come up with a workaround for this.  
