@@ -27,6 +27,21 @@ for the filepaths on a different machine, username@ipaddress:filepath must be us
 To find the ip address of your laptop, use
 `hostname -I`
 
+## Accessing Vajra's ROS Network from your laptop:
+
+### On Vajra
+
+`export ROS_HOSTAME=<Vajra_ip>;`
+
+NOW (Run this as a part of the shell rc in vajra if it isn't already there):
+`export ROS_HOSTAME=192.168.0.104;roscore`
+
+### On Laptop
+
+`export ROS_HOSTAME=<Vajra_ip>; export ROS_MASTER_URI=http://<Vajra_ip>:11311;`
+
+NOW (alias this in your laptop):
+`export ROS_HOSTAME=192.168.0.104; export ROS_MASTER_URI=http://192.168.0.104:11311;`  
 
 ## Time issues
 
@@ -35,7 +50,7 @@ So when we catkin_make it much later, the command says that the files it's tryin
 
 We need to sync the time to the net by connecting LAN to vajra, approving netaccess and doing  
 
-`timedatectl set-ntp true
+`timedatectl set-ntp true  
 systemctl restart systemd-timesyncd`
 
 This is kind of a pain, would be awesome if someone can come up with a workaround for this.  
