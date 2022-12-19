@@ -1,8 +1,3 @@
-# EncoderCovariance
-Takes encoder data and updates the position and position covariance of the robot by publishing an odometry message.
-
-vajra_tiva.py is the functional python code and the only important file in this package. The rest are a framework used for testing it and/or older code.
-
 ## General Information
 
 Encoders are incrementally measuring instruments, so their measurements drift with time.  
@@ -28,8 +23,9 @@ However, we stopped coding this when we realised that our errors were far too la
 Now that we have taken care of the position, we must worry about the confidence of this measurement. This is given by the covariance matrix. If you don't know what that means (skip this if you do), A normal gaussian distribution has 2 parameters, mean and variance. In n Dimensions, we can still define a gaussian distribution, and the parameters of this are filled into the covariance matrix. The diagonal entries give variances of individual parameters. (If we have a 3D gaussian over x, y and yaw, the diagonal entries are the variance of x,y and yaw.) Several sensors we have give the vehicle's position along with their covariances, and these uncertainties are weighed against each other to determine with significantly better accuracy and certainty, the position of the vehicle. This merging of several sensors' data to give a single measurement is done by a Kalman Filter.  
 
 The covariance of the position has always been a pain for us. Previously, it was assumed to be some jugaad values. Now, we have a few partially done things before us:  
-- In the above mentioned repo, there is some code I wrote which does this, following this paper: https://drive.google.com/file/d/1SywLYtnIfx5PKHOlXF9dQt7bJXURntXA/view?usp=sharing  
+- In the above mentioned repo, there is some code I wrote which does this, following this paper: https://www.cs.cmu.edu/~motionplanning/papers/sbp_papers/kalman/chong_accurate_odometry_error.pdf
 This code doesn't work well at all. I don't know what I am doing wrong. The variances in the diagonal entries go negative, and some garbage values are seen.  
 - Lalit transcribed some rust code written for a Roomba from https://github.com/Sollimann/CleanIt/blob/main/autonomy/src/slam/README.md 
  into this repo: https://github.com/NuminousLozenge/Odometry-Error-model.git  
+This one gives valid data, and works well. This is a big upgrade from the previous constant values we were publishing. However, it shows some strange behaviour: the error is growing perpendicular to the direction of travel. Hopefully we can fix that.
 - The robot_localisation package might have something relevant. It was mentioned in the roscon talk about localisation, but I haven't looked into how to implement it yet.  
