@@ -29,3 +29,13 @@ This code doesn't work well at all. I don't know what I am doing wrong. The vari
  into this repo: https://github.com/NuminousLozenge/Odometry-Error-model.git  
 This one gives valid data, and works well. This is a big upgrade from the previous constant values we were publishing. However, it shows some strange behaviour: the error is growing perpendicular to the direction of travel. Hopefully we can fix that.
 - The robot_localisation package might have something relevant. It was mentioned in the roscon talk about localisation, but I haven't looked into how to implement it yet.  
+
+## Steps to get the encoders up:
+
+- [ ] Get proper encoder counts from elec.  
+- [ ] Ensure no mechanical trouble with the encoder and tyre.  
+Now that we have counts, we can do position math. But for that we need wheel base and wheel radius.  
+- [ ] Tune wheel radius
+- [ ] Tune wheel dist  
+That done, we can compute the covariance matrix and publish the odometry.  
+- [ ] Make a decent error model for the covariance.
