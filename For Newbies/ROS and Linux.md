@@ -1,4 +1,4 @@
-# Sourcing
+## Sourcing
 
 This contains some brief notes I made when I was doing my Application.  
 It contains only extremely basic stuff, but I find it useful to come back here once I suffer bursts of amnesia.  
@@ -14,7 +14,7 @@ An important notice: Here, we are still using ros noetic. This is an awesome ver
 There have however been several upgrades, and ROS 2 is now en vogue.  
 Once we switch to that, we can just not source noetic commands, and source ros2 instead.  
 
-# Roscore 
+## Roscore 
 
 This contains a ton of background processes that are essential before you can do anything with ROS. It sets the basic platform on which everyone can interact. ROS is not an operating system, even if the name seems to suggest so. I'd say it's closer to a communication protocol. ROS messages allow various codes, presumaby in different languages to interact in a seamless manner.  
 
@@ -23,7 +23,7 @@ You will probably need to always give a tab of the terminal for roscore. Do NOT 
 I say probably, because when we use launch files for instance, roscore is automatically initiated in the background for us, and we can live happily ever after.  
 This is more of a concern when you get code from elec who apparently have never heard of this mysterious concept called launch files. THey'll tell you a sequence of python files to run, which you can then promptly add to a launch file.  
 
-# Nodes
+## Nodes
 
 Initiate a node:  
 `rosrun [package_name] [node_name]`  
@@ -38,7 +38,7 @@ Super useful, especially in complex scenarios, when combined with rosnode list. 
 Once you build something complex, the rqt_graph is among the most beautiful things on this planet.  
 
 
-# Topics
+## Topics
 
 Fetch the info fed into a particular topic.  
 `rostopic echo [topic]`
@@ -56,7 +56,7 @@ This gives the frequency at which the data feed gets new information:
 `rostopic hz [topic]`  
 This command is just trivia at this point.  
 
-# Services
+## Services
 
 Fetch a list of all available services  
 rosservice list  
@@ -75,7 +75,7 @@ This should tell you what type of msg you must send. Now use
 `rosmsg show [typename]`  
 This tells you what is expected as a feed for this type of data.Alternatively, You can just tab complete your way to the format.  
 
-# Parameter Server
+## Parameter Server
 
 All the important parameters are stored here.  
 `rosparam list`  
@@ -87,7 +87,14 @@ A namespace is basically a grouping system for topics. for instance, a topic may
 
 We can load the dumped rosparams using `rosparam load [file_name] [namespace]`
 
-# Making Packages
+## ROSBags
+
+Rosbags are an incredible tool when it comes to testing code, and reviewing runs. They record every ros message published to a set of topics you choose. to record data from all topics, simply do `rosbag record -a -O mycustomname.bag`  
+-O renames the bagfile from the default, which is just the timestamp.  
+
+When you play back a rosbag, all the same topics and nodes are recreated, and all the same messages are published. This way, if I say, recorded all the encoder pulse data, I can now rosrun an encoder odometry processing file on my system, seperately, while playing that rosbag which gives real life data, in the real format. This is great, because you don't have to test every piece of code live on the vehicle.  
+
+## Making Packages
 
 First, create a new catkin workspace. Just make an empty workspace folder with an empty src folder. Run catkin_make. It will do all the magic for you.  
 And by the way, you can avoid 2 directory make commands using `mkdir -p ws_name/src` the -p means "make any parent folders if required."  
@@ -114,7 +121,15 @@ I recomend aliasing the source and catkin make commands as you'll need to do it 
 I used to have build aliased to `cd ~/catkin_ws/; catkin_make;. ~/catkin_ws/devel/setup.bash; cd -'` (Reminder: this kind of info can be found using "type cmdname")
 but now I'd recommend using a relative path, and building the pwd directly instead. That's way more versatile.
 
-# Gazebo
+## Rosdep
+
+When packages get large and complex, we will inevitably have to import external libraries. These public packages need to be installed to run the code on a new machine. The package.xml lists the dependencies required to run that package. PLEASE maintain that properly. If you need, say, a custom rosmessage type form another one of your packages, in the same workspace, just add <depend pkgname/>   
+
+Unless you have all dependencies, and your packages compile in catkin_make correctly, your IDE will not recognise your workspace commands to be valid, and autocomplete documentation etc won't work.  
+
+Run this to get all the dependencies automatically installed: `rosdep install --from-paths <path to catkin_ws>/src --ignore-src -y`  
+
+## Gazebo
 
 Sigh.  
 Here there be dragons.  
