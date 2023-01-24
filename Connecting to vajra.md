@@ -10,7 +10,9 @@ To find the vehicle ip in case it is not already known, go to your browser, and 
 Log in to it. In case the password is not known, reset the modem and use the password on the back of the modem.  
 The vehicle will be seen as a connected device inside this.  
 
-Ask someone for the username password authentication. To finish sshing into the vehicle.  
+Ask someone for the username password authentication to finish sshing into the vehicle.  
+Preferably, add a key to authenticate you automatically, since doing this on every terminal quickly becomes a pain.  
+#TODO: Find out how to do this.
 
 ## Copying files
 
