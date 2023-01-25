@@ -60,7 +60,7 @@ alias this to get started faster. You must've declared the bot_ip and uname vari
 alias bot_mount="sshfs ${BOT_UNAME}@${BOT_IP}:./rosserial_ws ~/rpi/mnt"    
 Here, I've made a mount folder in ~/rpi. You must not open mnt with the ide, since that will create .idea files on the vehicle. (inside the mnt folder)  
 The very reason I've made two dummy folders, rpi and mnt, is because I'll open rpi as the project, and the entire mount will be my project with no issues.  
-In that alias, I've mounted the workspace we were using primarily. Change that in your alias, or even better, make it a shell variable. Don't mount the entire rpi inside the mnt, typically doesns't go too well, given pycharm will try to index everything. 
+In that alias, I've mounted the workspace we were using primarily. Change that in your alias, or even better, make it a shell variable. Don't mount the entire rpi inside the mnt, typically doesn't go too well, given pycharm will try to index everything. 
 
 ## Time issues
 
